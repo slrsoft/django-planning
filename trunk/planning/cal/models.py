@@ -9,11 +9,12 @@ class Profile(models.Model):
         pass
 
 class TypeEvent(models.Model):
-    file = models.ImageField(upload_to='images')
+    file = models.ImageField(upload_to='images', null=True, blank=True)
     name = models.CharField(max_length=100, null=True, blank=True)
-    type = models.CharField(max_length=1, choices=(('1','congé'),), default='1')
+    type = models.CharField(max_length=1, choices=(('0','vide'),('1','congé'),), default='0')
     
     def graphic(self):
+        if not self.file: return ''
         return '<img name=image%d src=%s>' % (self.id, self.get_file_url())
     graphic.allow_tags=True
     
@@ -23,7 +24,7 @@ class TypeEvent(models.Model):
         return self.name
 
 class DayEvent(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, null=True, blank=True)
     valid_user = models.ForeignKey(User, null=True, blank=True, related_name='valid_dayevent_set')
     type = models.ForeignKey(TypeEvent)
     day = models.DateField()

@@ -1,0 +1,17 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+{% block content %}
+<div id="content-main">
+<h1>Planning</h1>
+{{ user_id }}
+
+<table>
+<tr><th>mois</th><th colspan=4>jan</th><th colspan=4>fév</th></tr>
+<tr><th>sem.</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr>
+<tr><th>camescope</th><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td></tr>
+<tr><th>disque HD</th><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td></tr>
+</table>
+
+</div>
+
+{% endblock %}
