@@ -6,15 +6,30 @@
 {{ user_id }}
 
 <table>
-<tr><th>mois</th><th colspan=4>jan</th><th colspan=4>fév</th></tr>
-<tr><th>sem.</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr>
-<tr><th>camescope</th><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td></tr>
-<tr><th>disque HD</th><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td><td>VSDLMMJ</td></tr>
 <tr>
-{% for day in days %}
-<td>[{{ day.day_week }}]</td>
+{% for year in cal.years %}
+<th colspan={{year.nb}}>{{year.num}}</th>
 {% endfor %}
 </tr>
+
+<tr>
+{% for month in cal.months %}
+<th colspan={{month.nb}}>{{month.month_name}}</th>
+{% endfor %}
+</tr>
+
+<tr>
+{% for week in cal.weeks %}
+<td colspan={{week.nb}}>{{week.num}}</td>
+{% endfor %}
+</tr>
+
+<tr>
+{% for day in cal.days %}
+<td>{{day.name_abbr}}</td>
+{% endfor %}
+</tr>
+
 </table>
 
 </div>

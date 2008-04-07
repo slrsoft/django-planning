@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     manager = models.BooleanField(default=False)
+    code = models.CharField(max_length=50, editable=False, unique=True, verbose_name='code')
     class Admin:
         pass
 

@@ -5,6 +5,7 @@ urlpatterns = patterns('',
     # (r'^planning/', include('planning.foo.urls')),
 
     # Uncomment this for admin:
-     (r'^admin/', include('django.contrib.admin.urls')),
-     (r'^$', 'planning.cal.views.main'),
+    (r'^admin/', include('django.contrib.admin.urls')),
+    (r'^$', 'planning.cal.views.main'),
+    (r'^planning/(?P<code>.*)/$', 'planning.cal.views.main'),
 )
