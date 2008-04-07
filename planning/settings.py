@@ -80,3 +80,5 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'planning.cal',
 )
+
+AUTH_PROFILE_MODULE = 'cal.profile'
