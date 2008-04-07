@@ -14,19 +14,19 @@
 
 <tr>
 {% for month in cal.months %}
-<th colspan={{month.nb}}>{{month.month_name}}</th>
+<th colspan={{month.nb}}  class="{% cycle row1,row2 %}">{{month.month_name}}</th>
 {% endfor %}
 </tr>
 
 <tr>
 {% for week in cal.weeks %}
-<td colspan={{week.nb}}>{{week.num}}</td>
+<td colspan={{week.nb}} class="{% cycle row1,row2 %}">{{week.num}}</td>
 {% endfor %}
 </tr>
 
 <tr>
 {% for day in cal.days %}
-<td>{{day.name_abbr}}</td>
+<td  class="{% cycle row1,row2 %}">{{day.name_abbr}}</td>
 {% endfor %}
 </tr>
 
