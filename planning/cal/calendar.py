@@ -7,6 +7,7 @@ class Day:
     def __init__(self, day=None, day_event=None):
         if day:
             self.month = day.month
+            self.day_month = day.day
             self.year, self.week, self.day_week = day.isocalendar()
     def name(self):
         return WEEKDAYS[self.day_week-1]
