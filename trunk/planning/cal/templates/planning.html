@@ -30,6 +30,12 @@
 {% endfor %}
 </tr>
 
+<tr>
+{% for day in cal.days %}
+<td  class="{% cycle row1,row2 %}">{{day.day_month}}</td>
+{% endfor %}
+</tr>
+
 </table>
 
 </div>

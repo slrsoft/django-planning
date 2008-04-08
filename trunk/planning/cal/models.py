@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import date
 
 from random import choice
 import string
@@ -13,13 +14,16 @@ class Profile(models.Model):
     manager = models.BooleanField(default=False, core=True)
     code = models.CharField(max_length=50, editable=False, unique=True, verbose_name='code')
     
+    def __unicode__(self):
+        return self.user.username
+    
     def save(self):
         if not self.code:
             self.code = gen_string()
         models.Model.save(self)
     
     class Admin:
-        pass
+        list_display = ('user', 'manager', 'code')
 
 class TypeEvent(models.Model):
     file = models.ImageField(upload_to='images', null=True, blank=True)
@@ -48,14 +52,29 @@ class Planning(models.Model):
     user = models.ForeignKey(User, null=True, blank=True)
     name = models.CharField(max_length=50, verbose_name='name')
     desc = models.TextField(verbose_name='description')
-    code = models.CharField(max_length=50, verbose_name='code')
+    code = models.CharField(max_length=50, editable=False, verbose_name='code')
     
     def save(self):
-        if not self.code:
+        if not self.code or self.code=='':
             self.code = gen_string()
         models.Model.save(self)
     
     def __unicode__(self):
         return self.name
     class Admin:
-        list_display = ('name','user')
+        list_display = ('name','user', 'code')
+
+class PlanningSettings(models.Model):
+    planning = models.ForeignKey(Planning)
+    name = models.CharField(max_length=50, verbose_name='name', default='default')
+    ndays_before = models.PositiveSmallIntegerField(default=7)
+    nmonths = models.PositiveSmallIntegerField(default=0)
+    year_only = models.BooleanField(default=True)
+    start_year_day = models.DateField(default=date(date.today().year, 1, 1))
+    day_width = models.PositiveSmallIntegerField(null=True, blank=True)
+    
+    def __unicode__(self):
+        return self.name
+    
+    class Admin:
+        list_display = ('name','planning', 'year_only')
