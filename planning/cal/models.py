@@ -28,7 +28,7 @@ class Profile(models.Model):
 class TypeEvent(models.Model):
     file = models.ImageField(upload_to='images', null=True, blank=True)
     name = models.CharField(max_length=100, null=True, blank=True)
-    type = models.CharField(max_length=1, choices=(('0','vide'),('1','congé'),), default='0')
+    type = models.CharField(max_length=1, choices=(('0','vide'),('1','congé'),('r','ressource'),), default='0')
     
     def graphic(self):
         if not self.file: return ''
@@ -67,11 +67,11 @@ class Planning(models.Model):
 class PlanningSettings(models.Model):
     planning = models.ForeignKey(Planning)
     name = models.CharField(max_length=50, verbose_name='name', default='default')
-    ndays_before = models.PositiveSmallIntegerField(default=7)
-    nmonths = models.PositiveSmallIntegerField(default=0)
-    year_only = models.BooleanField(default=True)
-    start_year_day = models.DateField(default=date(date.today().year, 1, 1))
-    day_width = models.PositiveSmallIntegerField(null=True, blank=True)
+    ndays_before = models.PositiveSmallIntegerField(default=7, verbose_name='number of past days')
+    nmonths = models.PositiveSmallIntegerField(default=0, verbose_name='number of months', help_text='0 if current year only is set')
+    year_only = models.BooleanField(default=True, verbose_name='only current year')
+    start_year_day = models.DateField(default=date(date.today().year, 1, 1), verbose_name='year starts at day')
+    day_width = models.PositiveSmallIntegerField(null=True, blank=True, verbose_name='day size', help_text='in pixels')
     
     def __unicode__(self):
         return self.name
