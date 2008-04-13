@@ -1,0 +1,30 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+{% block content %}
+<div id="content-main">
+<h1>Edit planning</h1>
+
+<div class="module">
+<form method=post>
+<table>
+{{form1}}
+{{form}}
+</table>
+<input type=submit name=action value='Save'>
+</form>
+</div>
+
+<div class="module">
+<h2>invite members</h2>
+Send this url to invite members: {{ planning_url }}
+</div>
+
+<div class="module">
+<h2>Event types</h2>
+<a href=addtype/> add a new type</a>
+{% for type in types %}
+<br>{{type.name}} {{type.type}} <img src={{type.get_image_url}}>
+{% endfor %}
+</div>
+
+{% endblock %}
