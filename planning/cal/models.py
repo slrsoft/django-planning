@@ -25,14 +25,34 @@ class Profile(models.Model):
     class Admin:
         list_display = ('user', 'manager', 'code')
 
+class Planning(models.Model):
+    user = models.ForeignKey(User, null=True, blank=True, verbose_name='manager')
+    name = models.CharField(max_length=50, verbose_name='name')
+    desc = models.TextField(verbose_name='description')
+    code = models.CharField(max_length=50, unique=True, editable=False, verbose_name='code')
+    
+    def save(self):
+        if not self.code or self.code=='':
+            self.code = gen_string()
+        models.Model.save(self)
+    
+    def __unicode__(self):
+        return self.name
+    class Admin:
+        list_display = ('name','user', 'code')
+    class Meta:
+        unique_together = (("name", "user"),)
+
 class TypeEvent(models.Model):
-    file = models.ImageField(upload_to='images', null=True, blank=True)
+    user = models.ForeignKey(User, null=True, blank=True, verbose_name='private to user', help_text='blank=public')
+    planning = models.ForeignKey(Planning, null=True, blank=True, verbose_name='private to planning', help_text='blank=shared')
+    image = models.ImageField(upload_to='images', null=True, blank=True)
     name = models.CharField(max_length=100, null=True, blank=True)
     type = models.CharField(max_length=1, choices=(('0','vide'),('1','congé'),('r','ressource'),), default='0')
     
     def graphic(self):
-        if not self.file: return ''
-        return '<img name=image%d src=%s>' % (self.id, self.get_file_url())
+        if not self.image: return ''
+        return '<img name=image%d src=%s>' % (self.id, self.get_image_url())
     graphic.allow_tags=True
     
     class Admin:
@@ -47,24 +67,6 @@ class DayEvent(models.Model):
     day = models.DateField()
     class Admin:
         list_display = ('user', 'day', 'type', 'valid_user')
-
-class Planning(models.Model):
-    user = models.ForeignKey(User, null=True, blank=True)
-    name = models.CharField(max_length=50, verbose_name='name')
-    desc = models.TextField(verbose_name='description')
-    code = models.CharField(max_length=50, editable=False, verbose_name='code')
-    
-    def save(self):
-        if not self.code or self.code=='':
-            self.code = gen_string()
-        models.Model.save(self)
-    
-    def __unicode__(self):
-        return self.name
-    class Admin:
-        list_display = ('name','user', 'code')
-    class Meta:
-        unique_together = (("name", "user"),)
 
 class PlanningSettings(models.Model):
     planning = models.ForeignKey(Planning)

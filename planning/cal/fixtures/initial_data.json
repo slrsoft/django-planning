@@ -9,7 +9,7 @@
       "is_active": true, 
       "is_superuser": true, 
       "is_staff": true, 
-      "last_login": "2008-04-08 11:54:30", 
+      "last_login": "2008-04-13 22:38:02", 
       "groups": [], 
       "user_permissions": [], 
       "password": "sha1$4e5a2$2a777660137c98d70760f27d8a503d22299b3387", 
@@ -426,68 +426,55 @@
     "pk": 1, 
     "model": "cal.typeevent", 
     "fields": {
+      "image": null, 
+      "planning": null, 
       "type": "0", 
-      "name": "empty", 
-      "file": null
+      "user": null, 
+      "name": "empty"
     }
   }, 
   {
     "pk": 2, 
     "model": "cal.typeevent", 
     "fields": {
+      "image": "images/blue.png", 
+      "planning": null, 
       "type": "1", 
-      "name": "cong\u00e9", 
-      "file": ""
+      "user": null, 
+      "name": "cong\u00e9"
     }
   }, 
   {
     "pk": 3, 
     "model": "cal.typeevent", 
     "fields": {
+      "image": "images/green.png", 
+      "planning": null, 
       "type": "1", 
-      "name": "rtt", 
-      "file": ""
+      "user": null, 
+      "name": "rtt"
     }
   }, 
   {
     "pk": 4, 
     "model": "cal.typeevent", 
     "fields": {
+      "image": "images/red.png", 
+      "planning": null, 
       "type": "1", 
-      "name": "f\u00e9ri\u00e9", 
-      "file": ""
+      "user": null, 
+      "name": "f\u00e9ri\u00e9"
     }
   }, 
   {
     "pk": 5, 
     "model": "cal.typeevent", 
     "fields": {
+      "image": "images/orange.png", 
+      "planning": null, 
       "type": "1", 
-      "name": "non travaill\u00e9", 
-      "file": ""
-    }
-  }, 
-  {
-    "pk": 1, 
-    "model": "cal.planning", 
-    "fields": {
-      "code": "BXSfTNPY8U4i4Iih95QZiVv9yeYZa9YZ", 
-      "desc": "planning des cong\u00e9s de l'\u00e9quipe", 
-      "user": 2, 
-      "name": "cong\u00e9s"
-    }
-  }, 
-  {
-    "pk": 1, 
-    "model": "cal.planningsettings", 
-    "fields": {
-      "start_year_day": "2008-01-01", 
-      "day_width": 10, 
-      "name": "default", 
-      "nmonths": 0, 
-      "planning": 1, 
-      "ndays_before": 7, 
-      "year_only": true
+      "user": null, 
+      "name": "non travaill\u00e9"
     }
   }
 ]

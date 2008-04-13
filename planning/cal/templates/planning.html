@@ -38,6 +38,11 @@
 
 </table>
 <p>
+<table>
+<tr>{% for type in types %}<td align=center>{{type.name}}</td>{% endfor %}</tr>
+<tr>{% for type in types %}<td align=center>{{type.graphic|safe}}</td>{% endfor %}</tr>
+</table>
+<p>
 <a href=add/>create a new planning</a>
 
 </div>
