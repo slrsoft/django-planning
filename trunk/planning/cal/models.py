@@ -63,6 +63,8 @@ class Planning(models.Model):
         return self.name
     class Admin:
         list_display = ('name','user', 'code')
+    class Meta:
+        unique_together = (("name", "user"),)
 
 class PlanningSettings(models.Model):
     planning = models.ForeignKey(Planning)
@@ -78,3 +80,5 @@ class PlanningSettings(models.Model):
     
     class Admin:
         list_display = ('name','planning', 'year_only')
+    class Meta:
+        verbose_name_plural = 'Plannings Settings'
