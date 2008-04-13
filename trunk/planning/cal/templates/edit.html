@@ -5,6 +5,12 @@
 <h1>Edit planning</h1>
 
 <div class="module">
+<h2>invite members</h2>
+Send this url to invite members: {{ planning_url }}
+</div>
+
+<div class="module">
+<h2>Settings</h2>
 <form method=post>
 <table>
 {{form1}}
@@ -15,16 +21,12 @@
 </div>
 
 <div class="module">
-<h2>invite members</h2>
-Send this url to invite members: {{ planning_url }}
-</div>
-
-<div class="module">
 <h2>Event types</h2>
-<a href=addtype/> add a new type</a>
-{% for type in types %}
-<br>{{type.name}} {{type.type}} <img src={{type.get_image_url}}>
-{% endfor %}
+<a href=../addtype/> add a new type</a>
+<table>
+<tr>{% for type in types %}<td align=center>{{type.name}}</td>{% endfor %}</tr>
+<tr>{% for type in types %}<td align=center>{{type.graphic|safe}}</td>{% endfor %}</tr>
+</table>
 </div>
 
 {% endblock %}

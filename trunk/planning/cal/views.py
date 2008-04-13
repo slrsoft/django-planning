@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from datetime import date, timedelta
 from calendar import *
 
-from forms import PlanningSettingsForm, PlanningForm
+from forms import PlanningSettingsForm, PlanningForm, TypeForm
 from models import Planning, PlanningSettings, TypeEvent
 
 type_vide,c = TypeEvent.objects.get_or_create(name='empty', type='0')
@@ -25,8 +25,6 @@ def main(request, template='planning.html'):
     today = date.today()
     cal = Calendar(today)
     context['cal'] = cal
-    
-    
     return render_to_response(template, context)
 
 def add_planning(request, redirect='..'):
@@ -55,7 +53,7 @@ def edit(request, id, template='edit.html', redirect='..'):
     if request.method == 'POST':
         form1 = PlanningForm(request.POST, instance=p)
         form = PlanningSettingsForm(request.POST, instance=pset)
-        if form.is_valid():
+        if form.is_valid() and form1.is_valid():
             # Do form processing here...
             return HttpResponseRedirect(redirect)
     else:
@@ -63,5 +61,26 @@ def edit(request, id, template='edit.html', redirect='..'):
         form = PlanningSettingsForm(instance=pset)
     return render_to_response(template, {'form': form,
                                          'form1': form1,
-                                         'planning_url':'http://urlxxx',
+                                         'planning_url':'http://%s/planning/%s/' % (request.META['HTTP_HOST'], p.code),
                                          'types':types})
+
+def add_type(request, id, template='type.html', redirect='../edit/'):
+    if request.method == 'POST':
+        form = TypeForm(request.POST)
+        if form.is_valid():
+            # Do form processing here...
+            return HttpResponseRedirect(redirect)
+    else:
+        form = TypeForm()
+    return render_to_response(template, {'form': form})
+
+
+def planning(request, code, template='planning.html'):
+    context = {}
+    p = Planning.objects.get(code=code)
+    types = TypeEvent.objects.all()
+    today = date.today()
+    cal = Calendar(today)
+    context['cal'] = cal
+    context['types'] = types
+    return render_to_response(template, context)
