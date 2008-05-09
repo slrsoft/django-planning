@@ -12,5 +12,6 @@ urlpatterns = patterns('',
     (r'^planning/(?P<id>.*)/edit/$', 'planning.cal.views.edit', {'template':'edit.html'}),
     (r'^planning/(?P<id>.*)/addtype/$', 'planning.cal.views.add_type', {'template':'type.html'}),
     (r'^planning/(?P<code>[^/]+)/$', 'planning.cal.views.planning'),
+    (r'^planning/$', 'planning.cal.views.planning'),
     (r'^static/(.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )
