@@ -81,5 +81,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'planning.cal',
 )
+# 100 days
+SESSION_COOKIE_AGE = 3600*24*100
 
 AUTH_PROFILE_MODULE = 'cal.profile'
