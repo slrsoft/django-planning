@@ -86,7 +86,7 @@ def planning(request, code=None, template='planning.html'):
     context['types'] = types
     context['blank'] = TypeEvent.objects.get(name='empty')
     user = get_user(request)
-    context['user_id'] = user.username
+    context['user'] = user
     return render_to_response(template, context)
 
 def get_user(request):
