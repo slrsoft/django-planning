@@ -79,13 +79,20 @@ def planning(request, code=None, template='planning.html'):
     else:
         request.session['planning_code'] = code
     p = Planning.objects.get(code=code)
+    user = get_user(request)
+    if request.method == 'POST':
+        s = ""
+        for k,v in request.POST.iteritems():
+            if k.startswith('20'):
+                if len(v[0]) > 0:
+                    s += " %d" % int(v[0])
+        return HttpResponse(s)
     types = TypeEvent.objects.all()
     today = date.today()
     cal = Calendar(today)
     context['cal'] = cal
     context['types'] = types
     context['blank'] = TypeEvent.objects.get(name='empty')
-    user = get_user(request)
     context['user'] = user
     return render_to_response(template, context)
 
