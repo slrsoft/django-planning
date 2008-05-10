@@ -5,34 +5,44 @@
 <h1>Planning</h1>
 {{ user_id }}
 
+<form method=post>
+
 <table>
 <tr>
+<th></th>
 {% for year in cal.years %}
 <th colspan={{year.nb}}>{{year.num}}</th>
 {% endfor %}
 </tr>
 
 <tr>
+<th></th>
 {% for month in cal.months %}
 <th colspan={{month.nb}}  class="{% cycle row1,row2 %}">{{month.month_name}}</th>
 {% endfor %}
 </tr>
 
 <tr>
+<th></th>
 {% for week in cal.weeks %}
-<td colspan={{week.nb}} class="{% cycle row1,row2 %}">{{week.num}}</td>
+<td colspan={{week.nb}} class="{% cycle row1,row2 %}">S{{week.num}}</td>
 {% endfor %}
 </tr>
 
 <tr>
+<th></th>
 {% for day in cal.days %}
-<td  class="{% cycle row1,row2 %}">{{day.name_abbr}}</td>
+<td  class="{% cycle row1,row2 %}">{{day.name_abbr}}<br>{{day.day_month}}</td>
 {% endfor %}
 </tr>
 
 <tr>
+<th><input type=text size=14 name=nick value="your nickname"></th>
 {% for day in cal.days %}
-<td  class="{% cycle row1,row2 %}">{{day.day_month}}</td>
+<td  class="{% cycle row1,row2 %}">
+<a href="">{{ blank.graphic|safe }}</a>
+<input type=hidden name="{{ day.str }}">
+</td>
 {% endfor %}
 </tr>
 
@@ -41,7 +51,10 @@
 <table>
 <tr>{% for type in types %}<td align=center>{{type.name}}</td>{% endfor %}</tr>
 <tr>{% for type in types %}<td align=center>{{type.graphic|safe}}</td>{% endfor %}</tr>
+<tr>{% for type in types %}<td align=center><input type=radio name="type" value="{{type.id}}"></td>{% endfor %}</tr>
 </table>
+<input type=submit name=action value=Save>
+</form>
 <p>
 <a href=add/>create a new planning</a>
 

@@ -2,17 +2,19 @@
 # -*- coding: utf-8 -*-
 from datetime import date, datetime, timedelta
 from django.utils.dates import WEEKDAYS_ABBR, WEEKDAYS, MONTHS 
-
+_days = (None, 'L', 'M', 'M', 'J', 'V', 'S', 'D')
 class Day:
     def __init__(self, day=None, day_event=None):
         if day:
+            self.str = day.isoformat()
             self.month = day.month
             self.day_month = day.day
             self.year, self.week, self.day_week = day.isocalendar()
     def name(self):
         return WEEKDAYS[self.day_week-1]
     def name_abbr(self):
-        return WEEKDAYS_ABBR[self.day_week-1]
+        #return WEEKDAYS_ABBR[self.day_week-1]
+        return _days[self.day_week]
 
 class Period:
     def __init__(self, day, num):
