@@ -5,53 +5,58 @@
 <h1>Planning</h1>
 {{ user_id }}
 
+{% if user %}
 <form method=post>
+{% endif %}
 
 <table>
 <tr>
-<th></th>
+<th>Année</th>
 {% for year in cal.years %}
 <th colspan={{year.nb}}>{{year.num}}</th>
 {% endfor %}
 </tr>
 
 <tr>
-<th></th>
+<th>Mois</th>
 {% for month in cal.months %}
 <th colspan={{month.nb}}  class="{% cycle row1,row2 %}">{{month.month_name}}</th>
 {% endfor %}
 </tr>
 
 <tr>
-<th></th>
+<th>Semaine</th>
 {% for week in cal.weeks %}
 <td colspan={{week.nb}} class="{% cycle row1,row2 %}">S{{week.num}}</td>
 {% endfor %}
 </tr>
 
 <tr>
-<th></th>
+<th>Jour</th>
 {% for day in cal.days %}
 <td  class="{% cycle row1,row2 %}">{{day.name_abbr}}<br>{{day.day_month}}</td>
 {% endfor %}
 </tr>
 
+{% if user %}
 <tr>
 <th><input type=text size=14 name=nick value="your nickname"></th>
 {% for day in cal.days %}
-<td  class="{% cycle row1,row2 %}">
-<a href="">{{ blank.graphic|safe }}</a>
+<td >
+<img src="{{blank.get_image_url}}" onmousedown="sel_day('{{day.str}}', {{ forloop.counter }},this);return false">
 <input type=hidden name="{{ day.str }}">
 </td>
 {% endfor %}
 </tr>
+{% endif %}
 
 </table>
 <p>
+
+{% if user %}
 <table>
-<tr>{% for type in types %}<td align=center>{{type.name}}</td>{% endfor %}</tr>
+<tr>{% for type in types %}<td align=center width=80>{{type.name}}</td>{% endfor %}</tr>
 <tr>{% for type in types %}<td align=center>{{type.graphic|safe}}</td>{% endfor %}</tr>
-<tr>{% for type in types %}<td align=center><input type=radio name="type" value="{{type.id}}"></td>{% endfor %}</tr>
 </table>
 <input type=submit name=action value=Save>
 </form>
@@ -59,5 +64,33 @@
 <a href=add/>create a new planning</a>
 
 </div>
+
+<script type="text/javascript">
+<!--
+ var b = new Array();
+ i=0
+{% for type in types %}
+ b[i] = new Image();
+ b[i].src = "{{ type.get_image_url }}";
+ b[i++].type_id = {{ type.id }}
+{% endfor %}
+nb_types = i
+cur_type = 1
+cur_day = -1
+ 
+function sel_day(day, n,item) {
+ if (cur_day == n) {
+   cur_type ++;
+   if (cur_type == nb_types) cur_type = 0;
+ }
+ document.forms[0].elements[n].value = b[cur_type].type_id;
+ item.src = b[cur_type].src;
+ cur_day = n
+ return false;
+}
+
+//-->
+</script>
+{% endif %}
 
 {% endblock %}
