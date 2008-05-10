@@ -84,6 +84,9 @@ def planning(request, code=None, template='planning.html'):
     cal = Calendar(today)
     context['cal'] = cal
     context['types'] = types
+    context['blank'] = TypeEvent.objects.get(name='empty')
+    user = get_user(request)
+    context['user_id'] = user.username
     return render_to_response(template, context)
 
 def get_user(request):
