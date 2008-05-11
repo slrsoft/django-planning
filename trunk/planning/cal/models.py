@@ -9,22 +9,6 @@ import string
 def gen_string(length=32, chars=string.letters + string.digits):
     return ''.join([choice(chars) for i in range(length)])
 
-class Profile(models.Model):
-    user = models.ForeignKey(User, verbose_name='utilisateur', unique=True, edit_inline=True, max_num_in_admin=1, num_in_admin=1)
-    manager = models.BooleanField(default=False, core=True)
-    code = models.CharField(max_length=50, editable=False, unique=True, verbose_name='code')
-    
-    def __unicode__(self):
-        return self.user.username
-    
-    def save(self):
-        if not self.code:
-            self.code = gen_string()
-        models.Model.save(self)
-    
-    class Admin:
-        list_display = ('user', 'manager', 'code')
-
 class Planning(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, verbose_name='manager')
     name = models.CharField(max_length=50, verbose_name='name')
