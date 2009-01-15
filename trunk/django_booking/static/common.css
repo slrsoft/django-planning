@@ -1,0 +1,628 @@
+/* CSS Document */
+
+
+
+BODY {margin: 0px 0px 0px 0px;
+
+	font-family: verdana, sans-serif;
+
+	font-size: 8pt;
+
+}
+
+/*police utilisée pour l'historique de navigation, aussi nommé " chemin de fer "*/
+
+.historique {
+
+	font:normal 10px verdana, sans-serif;
+
+	color:#990033;
+
+}
+
+/*sert à tracer des lignes horizontales. Utilisé notament pour les lignes en face des puces de retour en haut de page.*/
+
+.separateur {
+
+	font-size: 2px;
+
+	border-bottom-width: 1px;
+
+	border-bottom-style: solid;
+
+	border-bottom-color: #C7CF89;
+
+}
+
+/*sous-titre de page*/
+
+.sousTitre {
+
+	font-family: 'arial narrow',sans-serif;
+
+	font-size: 14pt;
+
+	font-weight: bold;
+
+	color: #909F14;
+
+}
+
+/*titre de niveau 3, neutre*/
+
+.sousSsTitreNeutre {
+
+	font-family: verdana, sans-serif;
+
+	font-size: 10pt;
+
+	color: #000000;
+
+}
+
+/*titre de niveau 3 coloré par la couleur principale de la charte. Un indice a été donné en prévision d'évolutions possibles de la charte.*/
+
+.sousSsTitreCouleur1 {
+
+	font-family: verdana, sans-serif;
+
+	font-weight:bold;
+
+	font-size: 10pt;
+
+	color: #909F14;
+
+}
+
+/*Style de sous-titre utilisé dans un élément de l'agenda*/
+
+.sousSsTitreAgenda {
+
+	font-family: verdana, sans-serif;
+
+	font-weight:bold;
+
+	font-size: 9pt;
+
+	color: #909F14;
+
+}
+
+/*Style de texte gris utilisé dans les éléments d'agenda*/
+
+.texteGris {
+
+	font-family: verdana, sans-serif;
+
+	font-weight:bold;
+
+	font-size: 8pt;
+
+	color: #666666;
+
+}
+
+/*définit le style des barres verticales situées en marge des sommaires*/
+
+.sommaireBarre {
+
+	background-color: #B2C705;
+
+}
+
+/*entrée de sommaire active*/
+
+.sommaireSelected {
+
+	border-top-width: 1px;
+
+	border-bottom-width: 1px;
+
+	border-top-style: solid;
+
+	border-bottom-style: solid;
+
+	border-top-color: #B2C705;
+
+	border-bottom-color: #B2C705;
+
+	font-family: verdana, sans-serif;
+
+	font-size: 9pt;
+
+	color: #97A524;
+
+	height:20px;
+
+}
+
+/*entrée de sommaire sélectionnable*/
+
+.sommaireItem {
+
+	font-family: verdana, sans-serif;
+
+	font-size: 8pt;
+
+	color: #000000;
+
+}
+
+/*première entrée de sommaire sélectionnable */
+
+.sommaireItem2 {
+
+	font-family: verdana, sans-serif;
+
+	font-size: 8pt;
+
+	color: #990033;	
+
+}
+
+/*spécifique aux actualités, style du mois*/
+
+.actuMois {
+
+	font-family: verdana, sans-serif;
+
+	font-size: x-small;
+
+	color: #97A524;
+
+	font-weight:bold;
+
+}
+
+/*spécifique aux actualités, style de la date*/
+
+.actuDate {
+
+	font: 7pt/8pt verdana,sans-serif;
+
+	color:#000000;
+
+}
+
+
+
+/*police par défaut*/
+
+.texteNormal {
+
+	font-family: verdana, sans-serif;
+
+	font-size: 8pt;
+
+}
+
+/*style d'en-tète de tableaux de données (tableaux visibles à l'affichage et non pas uniquement destinés à la mise en page)*/
+
+TD.dataTableHead {
+
+	background-color:#B2C705;
+
+	color:#FFFFFF;
+
+	text-align:center;
+
+	font-family: verdana, sans-serif;
+
+	font-size: 12pt;
+
+}
+
+/*utilisé par les cellules des tableaux de données dont le fond est coloré*/
+
+.fondColorePRB {
+
+	border-right:1px solid #B2C705;
+
+	padding:5px 10px 5px 10px;
+
+	background-color:#F0F4CD;
+
+	font-family: verdana, sans-serif;
+
+	font-size: x-small;
+
+}
+
+/*utilisé par les cellules des tableaux de données dont le fond n'est pas coloré*/
+
+.fondNeutrePRB {
+
+	border-right:1px solid #B2C705;
+
+	padding:5px 10px 5px 10px;
+
+	font-family: verdana, sans-serif;
+
+	font-size: x-small;
+
+}
+
+/*style des balise <a>*/
+
+A {
+
+	font-family: verdana, sans-serif;
+
+	font-size: 8pt;
+
+	color: #990033;
+
+	text-decoration:none;
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+section { 
+
+	font:8pt verdana, sans-serif;
+
+	color:#990033;
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+.liensSection {
+
+	font:8pt verdana, sans-serif;
+
+	color:#990033;
+
+	vertical-align:top;
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+.titreSection {
+
+	font:bold 10pt verdana, sans-serif;
+
+	color: #909F14;
+
+	border-bottom: 1px solid #D1DD69;
+
+	width:auto;
+
+	margin: 0 0;
+
+	padding: 0 0;
+
+	vertical-align:bottom;
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+.texteMarge {
+
+	font-family: verdana,sans-serif;
+
+	font-size: 8pt;
+
+	color:#000000;
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+A.section { 
+
+	font:8pt verdana, sans-serif;
+
+	color:#990033;
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+.titreSectionCopie {
+
+	font:bold 10pt verdana, sans-serif;
+
+	color: #909F14;
+
+	border-bottom: 1px solid #D1DD69;
+
+	width:auto;
+
+	margin: 0 0;
+
+	padding: 0 0;
+
+	vertical-align:top;
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+.copyright { 
+
+	font-family: Verdana;
+
+	font-size: 9px;
+
+	font-weight: normal;
+
+	color: #CCCCCC
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+.fondTitre {
+
+	background-color: #D1DD69;
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+.fondTitreClair {
+
+	background-color: #F0F4CD;
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+.fondSection {
+
+	background-color: #E0E99B;
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+.petite {
+
+	font:5pt verdana, sans-serif; 
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+.haute {
+
+	font:12pt verdana, sans-serif; 
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+.fondPage {
+
+	background-color: #FFFFF7;
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+.fondBarre {
+
+	background-color: #B5C701;
+
+	font:5pt verdana, sans-serif; 
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+A.sectionTete { 
+
+	font-family: verdana,sans-serif;
+
+	font-size: 9pt;
+
+	font-weight: bold;
+
+	color:#990033;
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+TD.dataTableHeadA {
+
+	background-color:#B2C705;
+
+	color:#FFFFFF;
+
+	text-align:center; 	
+
+	font-family: verdana, sans-serif;
+
+	font-size: 8pt;
+
+	font-weight:bold;	
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+.fondColorePRBA {
+
+	width :80pt;
+
+	border-right:1px solid #B2C705;
+
+	padding:5px 10px 5px 10px;
+
+	background-color:#FFFFFF;
+
+	text-align:center;
+
+	font-family: verdana, sans-serif;
+
+	font-size: 8pt;		
+
+	vertical-align:top;	
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+TD.dataTableHeadB {
+
+	background-color:#473682;
+
+	color:#FFFFFF;
+
+	text-align:center;
+
+	font-family: verdana, sans-serif;
+
+	font-size: 8pt;
+
+	font-weight:bold;	
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+.fondColorePRBB {
+
+	width :80pt; 
+
+	border-right:1px solid #473682;
+
+	padding:5px 10px 5px 10px;
+
+	background-color:#FFFFFF;
+
+	font-family: verdana, sans-serif;
+
+	text-align:center;
+
+	font-size: 8pt;
+
+	vertical-align:top;		
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+TD.dataTableHeadC {
+
+	background-color:#BBBBBF;
+
+	color:#FFFFFF;
+
+	text-align:center;
+
+	font-family: verdana, sans-serif;
+
+	font-size: 8pt;
+
+	font-weight:bold;
+
+}
+
+/*Style utilisé par la page d'accueil*/
+
+.fondColorePRBC {
+
+	width :80pt;
+
+	border-right:1px solid #BBBBBF;
+
+	padding:5px 10px 5px 10px;
+
+	background-color:#FFFFFF;
+
+	font-family: verdana, sans-serif;
+
+	text-align:center;
+
+	font-size: 8pt;
+
+	vertical-align:top;		
+
+}
+
+.miseajour {
+	font-family: verdana, sans-serif;
+	font-size: 8pt;
+	color: #A0A0A0;
+
+}
+.texteNormalOrange {
+	font-family: verdana, sans-serif;
+	font-size: 8pt;
+	color: #FF6600;
+	font-weight: normal;
+
+
+}
+.texteNormalOrangeGras {
+
+	font-family: verdana, sans-serif;
+	font-size: 8pt;
+	color: #FF6600;
+	font-weight: bold;
+}
+.sousSsTitreAgendaCopie {
+
+
+	font-family: verdana, sans-serif;
+
+	font-weight:bold;
+
+	font-size: 8pt;
+
+	color: #909F14;
+}
+.texteNormalGras {
+	font-family: verdana, sans-serif;
+	font-size: 8pt;
+	font-weight: bold;
+
+}
+.texteNormalVert {
+
+	font-family: verdana, sans-serif;
+	font-size: 8pt;
+	color: #909F14;
+	font-weight: normal;
+}
+.texteNormalVertGras {
+
+
+	font-family: verdana, sans-serif;
+	font-size: 8pt;
+	color: #909F14;
+	font-weight: bold;
+}
+.fondTitreClairTexte {
+	background-color: #F0F4CD;
+	font-family: Verdana, sans-serif;
+	font-size: 8pt;
+
+}
+.texteGrisnongras {
+
+
+	font-family: verdana, sans-serif;
+
+	font-weight:normal;
+
+	font-size: 8pt;
+
+	color: #666666;
+}
+.texte_mois {
+	font-family: verdana, sans-serif;
+	font-size: 8pt;
+	color: #ffffff;
+	font-weight: bold;
+}
+abbr, acronym, .help {
+ border-bottom: 1px dotted #333;
+ cursor: help;
+ } 
