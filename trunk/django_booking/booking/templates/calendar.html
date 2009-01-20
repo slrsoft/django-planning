@@ -1,0 +1,79 @@
+{% extends "jquery/base2.html" %}
+{% block title %}Calendrier{% endblock %}
+
+{% load jquery %}
+
+{% block jquery_ui_lib %}
+	<script type="text/javascript" src="{% jq_ui_base %}ui.core.js"></script>          
+	<script type="text/javascript" src="{% jq_ui_base %}ui.selectable.js"></script>          
+{% endblock %}
+
+
+{% block extra_header %}
+<style>
+ul { list-style: none; padding: 2px 0 2px 0; }
+.ui-selected { background: #727EA3; color: #FFF; }
+.daytag { background: #727EA3; color: #FFF; }
+.ui-selecting { border: 1px solid #727EA3; padding: 1px; }
+li { background: #CFD4E6; width: 40px; margin: 2px; font-size: 10px; font-family: Arial; padding: 2px; }
+ul.disp li { background: #FFFFFF;}
+
+#content-main { float:left; }
+#content-related { float:left; }
+#container { position:relative; width:100%; min-width:760px; padding:0; }
+</style>
+{% endblock %}
+
+
+{% block jq_document_ready %}
+    $(".myList").selectable({
+    	stop: function() {
+    		alert("stop");
+    	}
+    });
+{% endblock %}
+
+
+{% block body %}
+
+<div id=container>
+<div id=content-main>
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody>
+{% for row in yeartable.format %}
+<tr>
+	{% for m in row %}
+	<td valign="top" width=42px>
+		<ul class="myList">
+	    {{ m.year }}
+		{% for d in m.days %}
+		    <li>{{ d }}</li>
+		{% endfor %}
+		</ul>
+	</td>
+	<td valign="top"  width=42px>
+		<ul class="disp">
+	   {{ m.month }}
+		{% for d in m.days %}
+		    <li><span class="daytag">&nbsp;</span></li>
+		{% endfor %}
+		</ul>
+	</td>
+	{% endfor %}
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+<div id=content-related>
+Affectation zone
+<p>XXX
+<p>XXX
+<p>XXX
+<p>XXX
+
+</div>
+</div>
+
+{% endblock %}

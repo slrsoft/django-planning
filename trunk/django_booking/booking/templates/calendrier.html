@@ -15,41 +15,63 @@
 <link href="/static/calendrierBaton.css" media="screen" rel="stylesheet" type="text/css">
 <link href="/static/calendrierBaton.css" media="print" rel="stylesheet" type="text/css">
 
-<hr>
-{% for row in yeartable %}
-<p>	{% for m in row %}
-<br>	{% for d in m.days %}
-		    {{ d }}
-		{% endfor %}
-	{% endfor %}
-{% endfor %}
+  <script src="http://ui.jquery.com/applications/jquery-1.3.js"></script>
+<script src="http://ui.jquery.com/applications/ui/ui.core.js"></script>
+<script src="http://ui.jquery.com/applications/ui/ui.selectable.js"></script>
+  
+  <script>
+  $(document).ready(function(){
+    $(".myList").selectable({
+    	stop: function() {
+    		alert("stop");
+    	}
+    });
+    
+  });
+  </script>
+
+<style>
+ul { list-style: none; padding: 2px 0 2px 0; }
+.ui-selected { background: #727EA3; color: #FFF; }
+.daytag { background: #727EA3; color: #FFF; }
+.ui-selecting { border: 1px solid #727EA3; padding: 1px; }
+li { background: #CFD4E6; width: 40px; margin: 2px; font-size: 10px; font-family: Arial; padding: 2px; }
+ul.disp li { background: #FFFFFF;}
+</style>
+
+</head><body>
+
 <hr>
 <table border="0" cellpadding="0" cellspacing="0">
-<tbody><tr>
-{% for month in semes1 %}
-	<td valign="top">
-	<table align="left" border="0" cellpadding="0" cellspacing="0" width="110">
-	<tbody>
-	<tr><td colspan="8" class="mois">AOUT 2008</td></tr>
-	<tr>
-	<td class="jour"> 1</td><td class="jour">&nbsp;</td><td class="jour">V</td>
-	<td class="jour">&nbsp;</td>
-	<td class="jour"></td>
-	
-	<td class="jour"></td>
-	<td class="jour"></td>
-	<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-	</tbody></table>
+<tbody>
+{% for row in yeartable %}
+<tr>
+	{% for m in row %}
+	<td valign="top" width=42px>
+		<ul class="myList">
+	    {{ m.year }}
+		{% for d in m.days %}
+		    <li>{{ d }}</li>
+		{% endfor %}
+		</ul>
 	</td>
-{% endfor %}
+	<td valign="top"  width=42px>
+		<ul class="disp">
+	   {{ m.month }}
+		{% for d in m.days %}
+		    <li><span class="daytag">&nbsp;</span></li>
+		{% endfor %}
+		</ul>
+	</td>
+	{% endfor %}
 </tr>
+{% endfor %}
 </tbody>
 </table>
 
 <br>
 
 
-</head><body>
 <table border="0" cellpadding="0" cellspacing="0" width="650">
   <tbody><tr>    
     <td width="20">&nbsp;</td>
