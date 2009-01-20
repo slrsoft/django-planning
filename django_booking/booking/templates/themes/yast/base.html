@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ LANGUAGE_CODE }}" xml:lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>{% block title %}Theme Preview{% endblock %}</title>
+	<link rel="stylesheet" href="{% block css_style_file %}http://wp-themes.com/wp-content/themes/yast-yet-another-standard-theme/style.css{% endblock %}" type="text/css" media="screen">
+	
+	{% block extrastyle %}
+	<link rel="alternate" type="application/rss+xml" title="Theme Preview RSS Feed" href="http://wp-themes.com/?feed=rss2">
+	<link rel="alternate" type="application/atom+xml" title="Theme Preview Atom Feed" href="http://wp-themes.com/?feed=atom">
+	<link rel="pingback" href="http://wp-themes.com/wp/xmlrpc.php">
+	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://wp-themes.com/wp/xmlrpc.php?rsd">
+	<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://wp-themes.com/wp/wp-includes/wlwmanifest.xml"> 
+	{% endblock %}
+	
+	{% block extrahead %}
+	{% endblock %}
+	
+	{% block blockbots %}
+	<meta name="robots" content="noindex,nofollow">
+	{% endblock %}
+	
+</head><body>
+
+	<div id="page">
+		<div id="prehead"></div>
+		<div id="border">
+			<div id="head">
+				<div class="l"></div>
+				<div class="r"></div>
+				<div class="m">
+					<h1><a href="http://wp-themes.com/">Theme Preview</a></h1>
+					<div>Previewing Another WordPress Blog</div>
+				</div>
+			</div>
+			<div id="prefooter"></div>
+			<div id="content">			<div class="news" id="post-19">
+				<div class="top"><h2>
+					<a href="http://wp-themes.com/?p=19" rel="bookmark" title="Permanent Link to Worth A Thousand Words">Worth A Thousand Words</a>
+					<span>&nbsp; October 17th, 2008</span>
+				</h2></div>
+				<div class="midTop"></div>
+				<div class="mid">
+					<div class="wp-caption alignnone" style="width: 445px;"><img alt="Boat" src="http://wpdotorg.files.wordpress.com/2008/11/boat.jpg" title="Boat" width="435" height="288"><p class="wp-caption-text">Boat</p></div>
+<p>Boat.</p>
+				</div>
+				<div class="midBot"></div>
+				<div class="bot">
+					Tags: <a href="http://wp-themes.com/?tag=boat" rel="tag">boat</a>, <a href="http://wp-themes.com/?tag=lake" rel="tag">lake</a><br>Posted in <a href="http://wp-themes.com/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a> | <span>Comments Closed</span>
+				</div>
+			</div>
+			
+
+
+			<div class="nav">
+				<div class="left"></div>
+				<div class="right"></div>
+				<div class="clear"></div>
+			</div>
+	</div>
+			
+			
+	<div id="sidebar">
+	{% block sidebar %}
+	<ul><li>
+		<form method="get" id="searchform" action="http://wp-themes.com/">
+		<h2><label for="s">Search for:</label></h2>
+		<div class="a">
+			<input value="" name="s" id="s" type="text">
+			<input id="searchsubmit" value="Search" type="submit">
+		</div>
+		</form>
+		</li>
+
+		<li><h2>Meta</h2>
+		<ul><li><a href="http://wp-themes.com/wp/wp-login.php">Log in</a></li>
+		<li><a href="http://validator.w3.org/check/referer" title="This page validates as XHTML 1.0 Transitional">Valid <abbr title="eXtensible HyperText Markup Language">XHTML</abbr></a></li>
+		<li><a href="http://gmpg.org/xfn/"><abbr title="XHTML Friends Network">XFN</abbr></a></li>
+		<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress</a></li>
+		<li><a href="http://www.timewaster.de/wordpress-yast-theme/" title="This is the Yast Theme for Wordpress by TimeWaster">Yast Theme</a></li>
+		</ul>
+		
+	</li></ul>
+	{% endblock %}
+	</div>
+	
+	<br clear="all">
+	</div>
+
+
+	<div id="footer">
+	{% block footer %}
+			Theme Preview is proudly powered by <a href="http://wordpress.org/">WordPress</a> |
+			<a href="http://wp-themes.com/?feed=rss2">Entries (RSS)</a> and <a href="http://wp-themes.com/?feed=comments-rss2">Comments (RSS)</a>.					</div>
+	{% endblock %}
+	</div>
+
+</body></html>

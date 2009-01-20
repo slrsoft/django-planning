@@ -61,7 +61,7 @@ class DataBooking(models.Model):
     book_id = models.AutoField(primary_key=True)
     rand_code = models.IntegerField(null=True, blank=True)
     date = models.DateTimeField(db_column='book_date')
-    data = models.ForeignKey(Data, db_column='object_id')
+    data = models.ForeignKey(Data, db_column='object_id', verbose_name='object')
     user = models.ForeignKey(DataUser)
     start = models.DateTimeField(db_column='book_start')
     end = models.DateTimeField(db_column='book_end')
