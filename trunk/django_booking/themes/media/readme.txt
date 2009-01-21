@@ -1,0 +1,1 @@
+content is optional: base templates have external linkref as default

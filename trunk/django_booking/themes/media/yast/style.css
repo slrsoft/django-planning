@@ -1,0 +1,109 @@
+/*
+Theme Name: YAST (Yet Another Standard Theme)
+Theme URI: http://www.timewaster.de/wordpress-yast-theme/
+Description: A much better theme based on the ***** Kubrik layout. For more informations about the features and how to customize this theme visit the theme homepage.
+Version: 1.1
+Author: TimeWaster
+Author URI: http://www.timewaster.de/
+Tags: blue, fixed width, two columns, widgets, rounded corners, customizable header, customizable background colors
+
+	The CSS, XHTML and design is released under GPL:
+	http://www.opensource.org/licenses/gpl-license.php
+
+	This Theme uses parts of the code and the translations from "The default WordPress theme based on the famous Kubrick." (http://binarybonsai.com/kubrick/) which was released under GPL:
+	http://www.opensource.org/licenses/gpl-license.php
+*//*
+
+
+ONLY CONFIGURE YOUR COLORS AT THE END OF THIS FILE!!!
+
+
+common */
+body,div,span,td,h1,h2,h3,h4,h5,h6,p,input{font:normal 12px Verdana,sans-serif; margin:0px;}
+h1,h2,h3,h4,h5,h6{font-weight:bold;}
+body{background:url(img/page-bg.png) #ccc7be;}
+form{padding:0px; margin:0px;}
+input[type=text], input[type=checkbox], textarea{border:1px solid #999;}
+img{border:0px;}
+a{color:#00c; text-decoration:none;}
+a:hover{text-decoration:underline;}
+p{margin-bottom:10px;}
+hr{border:0px; border-bottom:1px solid #999;}
+/* structure */
+#page{position:relative; margin:14px auto; width:858px;}
+#border{position:relative; background:url(img/page-border.png) repeat-y; width:858px;}
+#prehead{width:858px; height:45px; background:url(img/page-head.png) no-repeat;}
+#head{position:absolute; left:24px; top:-21px; width:810px; height:134px; background:url(img/logo.jpg);}
+#head .l{position:absolute; left:0px; top:0px; width:15px; height:134px; background:url(img/logo-left.png) no-repeat;}
+#head .m{position:absolute; left:15px; top:0px; width:780px; height:134px; text-align:center; background:url(img/logo-mid.png) repeat-x;}
+#head .r{position:absolute; right:0px; top:0px; width:15px; height:134px; background:url(img/logo-right.png) no-repeat;}
+#head .m h1{padding-top:29px;}
+#head .m h1 a{font-size:36px; text-decoration:none;}
+#head .m div{margin-top:7px; font-size:14px; font-weight:bold;}
+#content{float:left; position:relative; width:600px; margin:113px 0px -9px 24px;}
+#contentMid{float:left; position:relative; width:600px; margin:113px 0px -9px 129px;}
+#sidebar{float:left; position:relative; width:200px; margin:113px 0px -9px 10px;}
+#prefooter{position:absolute; left:0px; bottom:-19px; width:858px; height:19px; background:url(img/page-footer1.png) no-repeat;}
+#footer{background:url(img/page-footer2.png) no-repeat; margin:19px 0px 14px 0px; padding-top:15px; color:#666; font-weight:bold; text-align:center;}
+#footer a{color:#559; font-weight:bold;}
+/* news */
+.news{position:relative; width:600px; margin-top:10px; background:url(img/news-mid.png) repeat-y;}
+.news .top{background:url(img/news-top.png) no-repeat; padding:10px 8px 6px 8px;}
+.news .top h2, .news .top h3{font-size:18px; font-weight:bold;}
+.news .top h2 a, .news .top h3 a{color:#000;}
+.news .top h2 span, .news .top h3 span{color:#777;}
+.news .mid{padding:12px 19px 3px 19px; background:url(img/news-mid2.png) repeat-y;}
+.news .mid2{padding:2px 19px 1px 19px; background:url(img/news-mid2.png) repeat-y;}
+.news .mid a, .news .mid2 a{text-decoration:underline; font-weight:bold;}
+.news .midTop{height:5px; background:url(img/news-top2.png) no-repeat;}
+.news .midBot{height:5px; background:url(img/news-bot2.png) no-repeat;}
+.news .midBot2{height:15px; background:url(img/news-bot3.png) no-repeat;}
+.news .bot{color:#777; text-align:center; padding:7px 9px 8px 9px; background:url(img/news-bot.png) bottom no-repeat;}
+.news .bot a{color:#00c;}
+.news .commentPic{float:left; margin:0px 10px 8px 0px;}
+/* navigation bar */
+.nav .left a, .nav .right a{width:150px; height:22px; background:url(img/button.png) no-repeat; padding-top:7px; text-align:center; margin-top:10px;}
+.nav .left a{float:left;}
+.nav .right a{float:right;}
+/* sidebar */
+#sidebar{color:#999;}
+#sidebar ul{margin:0px; padding:0px; list-style-type:none;}
+#sidebar > ul > li{background:url(img/menu-mid.png) repeat-y; margin-top:10px;}
+#sidebar > ul > li h2{display:block; height:18px; background:url(img/menu-top.png) no-repeat; padding:7px 9px 0px 9px; color:#000;}
+#sidebar > ul > li .a, #sidebar > ul > li > ul{padding:7px 9px 8px 9px; background:url(img/menu-bot.png) bottom no-repeat;}
+#sidebar input[type=text]{width:108px;}
+#sidebar a:before{content:"\bb""\a0";}
+#sidebar .text{padding:7px 0px 0px 0px; background:#fff;}
+#sidebar .text p{color:#000; font-weight:bold;}
+#sidebar .bk{color:#000;}
+#sidebar .categories .children{margin-left:10px;}
+/* miscellaneous */
+.h2head{margin-top:6px; font-size:14px;}
+.pageContent{margin:14px 0px 20px 0px;}
+.error1{margin-top:7px; color:#900;}
+.error2{margin:5px 0px 15px 0px; color:#900;}
+.pages{text-align:center; margin:7px 0px 15px 0px;}
+.clear{clear:both;}
+.MT10{margin-top:10px;}
+.comment{font-size:14px; margin-bottom:10px;}
+/* needed by wordpress */
+.aligncenter, div.aligncenter{display:block; margin-left:auto; margin-right:auto;}
+.alignleft{float:left;}
+.alignright{float:right;}
+.wp-caption{border:1px solid #ddd; text-align:center; background-color:#fff; padding-top:4px; margin:8px 0px 0px 0px;}
+.wp-caption img{margin:0; padding:0; border:0 none;}
+.wp-caption p.wp-caption-text{padding:7px 4px 8px; margin:0;}
+/*
+
+
+CONFIGURE YOUR COLORS HERE: */
+
+	#head .m h1 a, #head .m div{color:#fff;}                 /* head area text color */
+	#sidebar > ul > li{background-color:#e6eaf2;}            /* menu background color */
+	.news{background-color:#dae2f2;}                         /* post background color */
+	.nav .left a, .nav .right a{background-color:#dae2f2;}   /* previous-next navigation buttons background color */
+
+/* Remove this comment (not the code) if you wish the menu to be on the left side
+	#content{float:right; margin:113px 24px -9px 0px;}
+	#sidebar{margin:113px 0px -9px 24px;}
+*/
