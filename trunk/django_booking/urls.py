@@ -14,8 +14,6 @@ urlpatterns = patterns('',
     (r'^calendar/', 'django.views.generic.simple.direct_to_template',
      {'template': 'calendar.html',
       'extra_context':{'yeartable':yeartable}}),
-    (r'^themes/yast/preview', 'django.views.generic.simple.direct_to_template',
-     {'template': 'themes/yast/base.html'}),
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
@@ -23,6 +21,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^admin/(.*)', admin.site.root),
+    # themes
+    (r'^themes/', include('django_booking.themes.urls')),
     # static files
     (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )
