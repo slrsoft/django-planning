@@ -80,6 +80,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'django_booking.booking',
+    'django_booking.themes',
     'jquery'
 )
 
