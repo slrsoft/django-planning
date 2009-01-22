@@ -1,0 +1,4 @@
+#sidebar a.apply { background:transparent url('apply16.png') no-repeat; font-size: 16px; padding:0 10px 0 0; }
+#sidebar a.apply:hover { background:transparent url('apply24.png'); font-size: 20px; padding:0 16px 0 0; }
+#sidebar a.apply:before{content:none;}
+#sidebar a.apply:hover{text-decoration:none;}

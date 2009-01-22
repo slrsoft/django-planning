@@ -1,0 +1,31 @@
+{% extends "themes/yast/base.html" %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="/booking/media/css/booking.css" />
+{% endblock %}
+
+{% block extrahead %}
+
+	{% load jquery %}
+
+	{% block jquery_lib %}
+		<script type="text/javascript" src="{% jq_core_base %}jquery-1.3.js"></script>          
+	{% endblock %}
+	
+	{% block jquery_ui_lib %}{% endblock %}
+	
+	<script type="text/javascript">                                         
+	   $(document).ready(function() {
+	     {% block jq_document_ready %}{% endblock %}
+	   });
+	</script>
+
+	{% block extra_style %}{% endblock %}
+
+{% endblock %}
+
+{% block frame2 %}{% endblock %}
+
+{% block footer %}
+		Powered by django-booking | djiquery | django-themes | A django site.
+{% endblock %}
