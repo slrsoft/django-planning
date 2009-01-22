@@ -24,7 +24,7 @@ class DataBookingAdmin(admin.ModelAdmin):
 admin.site.register(DataBooking, DataBookingAdmin)
 
 class ParamAdmin(admin.ModelAdmin):
-    list_display = ('name', 'value')
+    list_display = ('name', 'value_or_color')
 admin.site.register(Param, ParamAdmin)
 
 class ParamLangAdmin(admin.ModelAdmin):

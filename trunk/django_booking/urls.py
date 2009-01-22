@@ -1,9 +1,6 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 
-import booking.calendars
-yeartable = booking.calendars.Year(2009)
-
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -11,9 +8,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Example:
     # (r'^django_booking/', include('django_booking.foo.urls')),
-    (r'^calendar/', 'django.views.generic.simple.direct_to_template',
-     {'template': 'calendar.html',
-      'extra_context':{'yeartable':yeartable}}),
+    (r'^booking/', include('django_booking.booking.urls')),
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:

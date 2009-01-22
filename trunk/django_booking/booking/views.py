@@ -1,1 +1,3 @@
-# Create your views here.
+
+def add_booking(request, days):
+    return None

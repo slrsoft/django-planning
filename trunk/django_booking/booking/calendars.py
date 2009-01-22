@@ -1,7 +1,11 @@
+#!/usr/local/bin/python
+# -*- coding: utf-8 -*-
 import calendar
 from calendar import monthrange
 
 days_ab = ('L', 'M', 'M', 'J', 'V', 'S', 'D')
+monthes = (None, u'Janv', u'Fév', u'Mars', u'Avril', u'Mai',
+           u'Juin', u'Juill', u'Août', u'Sept', u'Oct', u'Nov', u'Déc')
 
 
 class Day:
@@ -10,12 +14,18 @@ class Day:
     '''
     def __init__(self, year, month, daymonth, dayweek):
         self.year, self.month, self.daymonth, self.dayweek = year, month, daymonth, dayweek 
+    def tag_id(self):
+        return '%d-%d-%d' % (self.year, self.month, self.daymonth)
+    def week_end(self):
+        return (self.dayweek > 4)
     def __str__(self):
         return '%d %s' % (self.daymonth, days_ab[self.dayweek])
 
 class Month:
     def __init__(self, year, month, day_class=Day):
         self.year, self.month, self.day_class = year, month, day_class
+    def label(self):
+        return monthes[self.month]
     def days(self):
         ''' returns a sequence of days
         '''

@@ -1,4 +1,4 @@
-{% extends "jquery/base2.html" %}
+{% extends "booking/base_site.html" %}
 {% block title %}Calendrier{% endblock %}
 
 {% load jquery %}
@@ -9,51 +9,64 @@
 {% endblock %}
 
 
-{% block extra_header %}
+{% block extra_style %}
 <style>
-ul { list-style: none; padding: 2px 0 2px 0; }
-.ui-selected { background: #727EA3; color: #FFF; }
-.daytag { background: #727EA3; color: #FFF; }
-.ui-selecting { border: 1px solid #727EA3; padding: 1px; }
-li { background: #CFD4E6; width: 40px; margin: 2px; font-size: 10px; font-family: Arial; padding: 2px; }
-ul.disp li { background: #FFFFFF;}
-
-#content-main { float:left; }
-#content-related { float:left; }
-#container { position:relative; width:100%; min-width:760px; padding:0; }
+	ul.calendar { list-style: none; padding: 2px 1px; }
+	ul.calendar .ui-selected { border: 1px solid #727EA3; color: #A00; padding: 1px; }
+	.daytag { background: #727EA3; color: #FFF; }
+	ul.calendar .ui-selecting { border: 1px solid #727EA3; padding: 1px; }
+	ul.calendar li { background: #DFDFDF; width: 38px; margin: 2px; font-size: 10px; font-family: Arial; padding: 2px; }
+	ul.myList li { text-align:right; cursor:n-resize; }
+	ul.disp li { background: #FFFFFF; margin: 1px; padding: 2px 0 1px 0; }
+	ul.calendar li.dw-6, ul.calendar li.dw-5 { background: #BFBFBF; }
+    li.edition, span.edition { display:none; }
 </style>
 {% endblock %}
 
 
 {% block jq_document_ready %}
     $(".myList").selectable({
-    	stop: function() {
-    		alert("stop");
-    	}
+        stop: function(ev, ui) {
+            days = $.map( $(".ui-selected").get(), function(e, i) {
+              return e.id;
+              });
+            alert(days.join(','));
+            $(".edition").slideDown("slow");
+        }
     });
 {% endblock %}
 
+{% block header_site %}
+<h1><a href="http://wp-themes.com/">Booking</a></h1>
+<div>A django-booking demo</div>
+{% endblock %}
 
-{% block body %}
 
-<div id=container>
-<div id=content-main>
+{% block frame %}
+<div class="news" id="post-19">
+	<div class="top"><h2>
+		2009
+		<span>&nbsp;dernière mise à jour: jj/mm/yyyy</span>
+	</h2></div>
+	<div class="midTop"></div>
+	<div class="mid">
+
 <table border="0" cellpadding="0" cellspacing="0">
 <tbody>
 {% for row in yeartable.format %}
 <tr>
 	{% for m in row %}
 	<td valign="top" width=42px>
-		<ul class="myList">
-	    {{ m.year }}
+		<ul class="calendar myList">
+	    {{ m.label }}
 		{% for d in m.days %}
-		    <li>{{ d }}</li>
+		    <li class="dw-{{ d.dayweek }}" id="{{ d.tag_id }}">{{ d }}</li>
 		{% endfor %}
 		</ul>
 	</td>
 	<td valign="top"  width=42px>
-		<ul class="disp">
-	   {{ m.month }}
+		<ul class="calendar disp">
+	   &nbsp;
 		{% for d in m.days %}
 		    <li><span class="daytag">&nbsp;</span></li>
 		{% endfor %}
@@ -64,16 +77,58 @@ ul.disp li { background: #FFFFFF;}
 {% endfor %}
 </tbody>
 </table>
+
+	</div>
+	<div class="midBot"></div>
+	<div class="bot">
+	<a href=>2008</a> | <b>2009</b> | <a href=>2010</a>
+	</div>
 </div>
 
-<div id=content-related>
-Affectation zone
-<p>XXX
-<p>XXX
-<p>XXX
-<p>XXX
+{% endblock %}
 
-</div>
-</div>
 
+{% block sidebar %}
+<ul>
+	<li>
+		<h2>Vacances scolaires</h2>
+		<ul>
+			<li><span style="background:red">&nbsp;</span> <input type=checkbox checked> Zone A: xxx
+			  <a class="apply" href="javascript:select(1);" title="appliquer à la sélection">&nbsp;</a>
+			</li>
+			<li><span style="background:blue">&nbsp;</span> <input type=checkbox checked>  Zone B: xxx
+			  <a class="apply" href="javascript:select(1);" title="appliquer à la sélection">&nbsp;</a>
+			</li>
+			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked>  Zone C: xxx
+			  <a class="apply" href="javascript:select(1);" title="appliquer à la sélection">&nbsp;</a>
+			</li>
+		</ul>
+	</li>
+	<li>
+		<h2>Saisons locatives</h2>
+		<ul>
+			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked> Haute hiver</li>
+			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked> Basse hiver</li>
+			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked> Haute été</li>
+			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked> Basse été</li>
+		</ul>
+	</li>
+	<li>
+		<h2>Réservations</h2>
+		<ul>
+			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked> Agence</li>
+			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked> Olivier</li>
+			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked> Jérome</li>
+			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked> <b>Eric</b></li>
+		</ul>
+	</li>
+	<li class="edition">
+		<h2>Edition</h2>
+		<ul><li>
+		Vous venez de sélectionner une période. Vous pouvez maintenant
+		affecter cette période à un item dans une des boites ci-dessus.
+		</li></ul>
+	</li>
+	
+</ul>
 {% endblock %}

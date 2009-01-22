@@ -41,6 +41,9 @@
 
 
 			<div id="content">
+			{% block content %}
+			
+				{% block frame %}
 				<div class="news" id="post-19">
 					<div class="top"><h2>
 						<a href="http://wp-themes.com/?p=19" rel="bookmark" title="Permanent Link to Worth A Thousand Words">Worth A Thousand Words</a>
@@ -56,7 +59,9 @@
 						Tags: <a href="http://wp-themes.com/?tag=boat" rel="tag">boat</a>, <a href="http://wp-themes.com/?tag=lake" rel="tag">lake</a><br>Posted in <a href="http://wp-themes.com/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a> | <span>Comments Closed</span>
 					</div>
 				</div>
-
+				{% endblock %}
+				
+				{% block frame2 %}
 				<div class="news" id="post-18">
 					<div class="top"><h2>
 						Title 2 <span>span</span>
@@ -76,7 +81,10 @@
 						div class=bot
 					</div>
 				</div>
-
+				{% endblock %}
+				
+		{% endblock %}
+		
 			<div class="nav">
 				<div class="left"></div>
 				<div class="right"></div>
