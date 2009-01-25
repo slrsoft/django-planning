@@ -1,0 +1,16 @@
+{% extends "calendar.html" %}
+
+{% block extrahead %}{% endblock %}
+{% block jquery_ui_lib %}{% endblock %}
+{% block jq_document_ready %}{% endblock %}
+{% block edition %}
+	{% if can_edit %}
+	<li>
+		<h2>Actions</h2>
+		<ul>
+			<li><a href=".">Mettre à jour</a></li>
+			<li><a href=edit/>Editer</a></li>
+		</ul>
+	</li>
+	{% endif %}
+{% endblock %}
