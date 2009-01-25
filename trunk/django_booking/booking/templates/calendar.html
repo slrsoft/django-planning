@@ -1,15 +1,16 @@
 {% extends "booking/base_site.html" %}
 {% block title %}Calendrier{% endblock %}
 
-{% load jquery %}
-
 {% block jquery_ui_lib %}
+	{% load jquery %}
+
 	<script type="text/javascript" src="{% jq_ui_base %}ui.core.js"></script>          
 	<script type="text/javascript" src="{% jq_ui_base %}ui.selectable.js"></script>          
 {% endblock %}
 
 
-{% block extra_style %}
+{% block extrastyle %}
+{{ block.super }}
 <style>
 	ul.calendar { list-style: none; padding: 2px 1px; }
 	ul.calendar .ui-selected { border: 1px solid #727EA3; color: #A00; padding: 1px; }
@@ -39,6 +40,13 @@
 {% block header_site %}
 <h1><a href="http://wp-themes.com/">Booking</a></h1>
 <div>A django-booking demo</div>
+
+<script type="text/javascript">
+function filter(item) {
+	document.location.href = 'filter/'+item.id+'/'+item.value;
+}
+</script>
+
 {% endblock %}
 
 
@@ -90,10 +98,19 @@
 
 {% block sidebar %}
 <ul>
+	{% for f in bookables_by_family %}
+		<li><h2>{{ f.name }}</h2>
+		<ul>
+		{% for ob in f.data_set.all %}
+			<li>{{ ob.name }}</li>
+		{% endfor %}
+		</ul>
+		</li>
+	{% endfor %}
 	<li>
 		<h2>Vacances scolaires</h2>
 		<ul>
-			<li><span style="background:red">&nbsp;</span> <input type=checkbox checked> Zone A: xxx
+			<li><span style="background:red">&nbsp;</span> <input id=1 type=checkbox checked onchange='filter(this)'> Zone A: xxx
 			  <a class="apply" href="javascript:select(1);" title="appliquer à la sélection">&nbsp;</a>
 			</li>
 			<li><span style="background:blue">&nbsp;</span> <input type=checkbox checked>  Zone B: xxx
@@ -122,6 +139,7 @@
 			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked> <b>Eric</b></li>
 		</ul>
 	</li>
+	{% block edition %}
 	<li class="edition">
 		<h2>Edition</h2>
 		<ul><li>
@@ -129,6 +147,7 @@
 		affecter cette période à un item dans une des boites ci-dessus.
 		</li></ul>
 	</li>
+	{% endblock %}
 	
 </ul>
 {% endblock %}
