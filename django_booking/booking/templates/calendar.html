@@ -43,7 +43,7 @@
 
 <script type="text/javascript">
 function filter(item) {
-	document.location.href = 'filter/'+item.id+'/'+item.value;
+	document.location.href = 'filter/'+item.id+'/'+item.checked;
 }
 </script>
 
@@ -101,8 +101,12 @@ function filter(item) {
 	{% for f in bookables_by_family %}
 		<li><h2>{{ f.name }}</h2>
 		<ul>
-		{% for ob in f.data_set.all %}
-			<li>{{ ob.name }}</li>
+		{% for ob in f.items %}
+			<li>
+				<span style="background:{{ ob.color }}">&nbsp;</span>
+				<input id={{ ob.pk }} type=checkbox {{ ob.checked }} onchange='filter(this)'>
+				{{ ob.name }}
+			</li>
 		{% endfor %}
 		</ul>
 		</li>
