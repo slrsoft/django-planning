@@ -71,6 +71,8 @@ class Data(models.Model):
     manager = models.ForeignKey(DataUser)
     misc_info = models.CharField(max_length=765, blank=True)
     
+    checked = None
+    
     def color(self):
         values = Param.objects.filter(name=u'color-%s'%self.name)
         if values.count() == 0:
