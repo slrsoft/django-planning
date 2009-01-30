@@ -7,6 +7,8 @@ days_ab = ('L', 'M', 'M', 'J', 'V', 'S', 'D')
 monthes = (None, u'Janv', u'Fév', u'Mars', u'Avril', u'Mai',
            u'Juin', u'Juill', u'Août', u'Sept', u'Oct', u'Nov', u'Déc')
 
+# hashtable yyyy-mm-dd -> seq of <span color=[data_color]/>
+_hash_booking_set = {}
 
 class Day:
     ''' Base class of a day view.
@@ -14,10 +16,15 @@ class Day:
     '''
     def __init__(self, year, month, daymonth, dayweek):
         self.year, self.month, self.daymonth, self.dayweek = year, month, daymonth, dayweek 
+        self.key = '%d-%d-%d' % (self.year, self.month, self.daymonth)
     def tag_id(self):
-        return '%d-%d-%d' % (self.year, self.month, self.daymonth)
+        return self.key
     def week_end(self):
         return (self.dayweek > 4)
+    def span_color_list(self):
+        if not _hash_booking_set.has_key(self.key):
+            return ""
+        return _hash_booking_set[self.key]
     def __str__(self):
         return '%d %s' % (self.daymonth, days_ab[self.dayweek])
 
@@ -40,6 +47,17 @@ class Year:
     def __init__(self, year, width=6, first_month=1, day_class=Day):
         self.year, self.width, self.first_month, self.day_class = year, width, first_month, day_class
     
+    def fill_bookings(self, data_list):
+        ''' fills _hash_booking_set
+        '''
+        for m in range(1,13):
+            d, n = monthrange(self.year, m)
+            for dm in range(1, n+1):
+                key = '%d-%d-%d' % (self.year, m, dm)
+                _hash_booking_set[key] = ""
+                for data in data_list:
+                    _hash_booking_set[key] += data.span_color()
+        
     def format(self):
         ''' returns a sequence of sequences of monthes
         '''
