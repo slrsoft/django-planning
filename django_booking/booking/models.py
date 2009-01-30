@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
+from datetime import date
+
 
 class ParamProfile(models.Model):
     profile_id = models.AutoField(primary_key=True)
@@ -74,11 +76,26 @@ class Data(models.Model):
     checked = None
     
     def color(self):
-        values = Param.objects.filter(name=u'color-%s'%self.name)
-        if values.count() == 0:
+        try:
+            return Param.objects.get(name=u'color-%s'%self.name).value
+        except Exception:
             return "white"
-        else:
-            return values[0].value
+    
+    def span_color(self, width=1, force_span=False, day=None):
+        if day:
+            av = True
+            for booking in self.databooking_set.all():
+                if not booking.day_available(day):
+                    av = False
+                    break
+            if av: return ""
+        
+        color = self.color()
+        if color == "white" and not force_span:
+            return "" 
+        nbsp = '&nbsp;' * width
+        return '<span style="background:%s;">%s</span>' % (color, nbsp)
+    span_color.allow_tags = True
     
     def __unicode__(self):
         return self.name
@@ -97,6 +114,14 @@ class DataBooking(models.Model):
     validated = models.BooleanField()
     misc_info = models.CharField(max_length=765)
     
+    def day_available(self, year, month, day):
+        return self.day_available2(date(year, month, day))
+    
+    def day_available2(self, wdate):
+        if wdate < self.start.date(): return True
+        if wdate > self.end.date(): return True
+        return False
+
     def __unicode__(self):
         return self.data.name
     class Meta:
@@ -120,6 +145,18 @@ class Param(models.Model):
     class Meta:
         db_table = u'rs_param'
         verbose_name = 'Parameter'
+
+def create_data_color(sender, instance=None, **kwargs):
+    if instance is None:
+        return
+    import random
+    pcolors = list(Param.objects.filter(name__startswith='color-name:'))
+    color = random.choice(pcolors)
+    Param.objects.get_or_create(name='color-%s' % instance.name,
+                                defaults={'value':color.value})
+    
+post_save.connect(create_data_color, sender=Data)
+
 
 class ParamLang(models.Model):
     lang_id = models.AutoField(primary_key=True)

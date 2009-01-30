@@ -9,6 +9,9 @@ import calendars
 
 def display(request, year, template='calendar.html', extra_context={}):
     yeartable = calendars.Year(int(year))
+    
+    yeartable.fill_bookings((Data.objects.get(name='Zone A'),))
+    
     context = {'yeartable':yeartable,
                'bookables_by_family':prepare_families(request.session),
                'can_edit':True, 'filter':request.session['filter']}
