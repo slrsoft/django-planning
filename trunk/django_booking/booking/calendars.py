@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import calendar
 from calendar import monthrange
+from datetime import date
 
 days_ab = ('L', 'M', 'M', 'J', 'V', 'S', 'D')
 monthes = (None, u'Janv', u'Fév', u'Mars', u'Avril', u'Mai',
@@ -50,13 +51,14 @@ class Year:
     def fill_bookings(self, data_list):
         ''' fills _hash_booking_set
         '''
+        year = self.year
         for m in range(1,13):
             d, n = monthrange(self.year, m)
             for dm in range(1, n+1):
                 key = '%d-%d-%d' % (self.year, m, dm)
                 _hash_booking_set[key] = ""
                 for data in data_list:
-                    _hash_booking_set[key] += data.span_color()
+                    _hash_booking_set[key] += data.span_color(day=date(year, m, dm))
         
     def format(self):
         ''' returns a sequence of sequences of monthes
