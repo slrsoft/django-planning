@@ -114,10 +114,10 @@ class DataBooking(models.Model):
     validated = models.BooleanField()
     misc_info = models.CharField(max_length=765)
     
-    def day_available(self, year, month, day):
+    def day_available2(self, year, month, day):
         return self.day_available2(date(year, month, day))
     
-    def day_available2(self, wdate):
+    def day_available(self, wdate):
         if wdate < self.start.date(): return True
         if wdate > self.end.date(): return True
         return False
