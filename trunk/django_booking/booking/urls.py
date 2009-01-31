@@ -10,7 +10,9 @@ yeartable = calendars.Year(2009)
 
 urlpatterns = patterns('',
     (r'^(?P<year>\d{4})/$', views.display, {'template':'calendar_ro.html'}),
+    (r'^(?P<year>\d{4})/edit/$', views.edit, {'template':'calendar.html'}),
     (r'^(?P<year>\d{4})/filter/(?P<id>\d+)/(?P<value>true|false)/$', views.display_filter),
+    (r'^(?P<year>\d{4})/edit/set/(?P<id>\d+)/(?P<days>.*)/$', views.edit_set),
     (r'^calendar/$', 'django.views.generic.simple.direct_to_template',
      {'template': 'calendar.html',
       'extra_context':{'yeartable':yeartable}}),
