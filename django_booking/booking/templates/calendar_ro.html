@@ -3,6 +3,14 @@
 {% block extrahead %}{% endblock %}
 {% block jquery_ui_lib %}{% endblock %}
 {% block jq_document_ready %}{% endblock %}
+
+
+{% block on_check %}
+function filter(item) {
+	document.location.href = 'filter/'+item.id+'/'+item.checked;
+}
+{% endblock %}
+
 {% block edition %}
 	{% if can_edit %}
 	<li>

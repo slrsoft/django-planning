@@ -31,7 +31,7 @@
             days = $.map( $(".ui-selected").get(), function(e, i) {
               return e.id;
               });
-            alert(days.join(','));
+            days_selected = days.join(',');
             $(".edition").slideDown("slow");
         }
     });
@@ -42,9 +42,13 @@
 <div>A django-booking demo</div>
 
 <script type="text/javascript">
+{% block on_check %}
+var days_selected = "";
+
 function filter(item) {
-	document.location.href = 'filter/'+item.id+'/'+item.checked;
+	document.location.href = 'set/'+item.id+'/'+days_selected;
 }
+{% endblock %}
 </script>
 
 {% endblock %}
@@ -53,7 +57,7 @@ function filter(item) {
 {% block frame %}
 <div class="news" id="post-19">
 	<div class="top"><h2>
-		2009
+		{{ yeartable.year }}
 		<span>&nbsp;dernière mise à jour: jj/mm/yyyy</span>
 	</h2></div>
 	<div class="midTop"></div>
@@ -89,7 +93,7 @@ function filter(item) {
 	</div>
 	<div class="midBot"></div>
 	<div class="bot">
-	<a href=>2008</a> | <b>2009</b> | <a href=>2010</a>
+	<a href=../{{ yeartable.year|add:"-1" }}/>{{ yeartable.year|add:"-1" }}</a> | <b>{{ yeartable.year }}</b> | <a href=../{{ yeartable.year|add:"1" }}/>{{ yeartable.year|add:"1" }}</a>
 	</div>
 </div>
 
@@ -111,38 +115,7 @@ function filter(item) {
 		</ul>
 		</li>
 	{% endfor %}
-	<li>
-		<h2>Vacances scolaires</h2>
-		<ul>
-			<li><span style="background:red">&nbsp;</span> <input id=1 type=checkbox checked onchange='filter(this)'> Zone A: xxx
-			  <a class="apply" href="javascript:select(1);" title="appliquer à la sélection">&nbsp;</a>
-			</li>
-			<li><span style="background:blue">&nbsp;</span> <input type=checkbox checked>  Zone B: xxx
-			  <a class="apply" href="javascript:select(1);" title="appliquer à la sélection">&nbsp;</a>
-			</li>
-			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked>  Zone C: xxx
-			  <a class="apply" href="javascript:select(1);" title="appliquer à la sélection">&nbsp;</a>
-			</li>
-		</ul>
-	</li>
-	<li>
-		<h2>Saisons locatives</h2>
-		<ul>
-			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked> Haute hiver</li>
-			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked> Basse hiver</li>
-			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked> Haute été</li>
-			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked> Basse été</li>
-		</ul>
-	</li>
-	<li>
-		<h2>Réservations</h2>
-		<ul>
-			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked> Agence</li>
-			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked> Olivier</li>
-			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked> Jérome</li>
-			<li><span style="background:green">&nbsp;</span> <input type=checkbox checked> <b>Eric</b></li>
-		</ul>
-	</li>
+
 	{% block edition %}
 	<li class="edition">
 		<h2>Edition</h2>

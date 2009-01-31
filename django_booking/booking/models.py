@@ -73,7 +73,7 @@ class Data(models.Model):
     manager = models.ForeignKey(DataUser)
     misc_info = models.CharField(max_length=765, blank=True)
     
-    checked = None
+    checked = ""
     
     def color(self):
         try:
