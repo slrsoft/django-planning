@@ -6,6 +6,7 @@ from django.template import RequestContext
 from models import *
 
 import calendars
+from datetime import date, timedelta
 
 def display(request, year, template='calendar.html', extra_context={}):
     yeartable = calendars.Year(int(year))
@@ -26,7 +27,7 @@ def edit(request, year, template='calendar.html', extra_context={}):
     yeartable.fill_bookings((Data.objects.get(name='Zone A'),))
     
     context = {'yeartable':yeartable,
-               'bookables_by_family':prepare_families(request.session, update_checkboxes=False),
+               'bookables_by_family':prepare_families(request.session, user=request.user, update_checkboxes=False, edit=True),
                'can_edit':True, 'filter':request.session['filter']}
     context.update(extra_context)
     response = render_to_response(template, context,
@@ -49,9 +50,21 @@ def display_filter(request, year, id, value):
     #return HttpResponse(str(request.session['filter']))
 
 def edit_set(request, year, id, days):
-    return HttpResponse(days)
+    datelist = []
+    for day in days.split(','):
+        y,m,d = day.split('-')
+        datelist.append( date(int(y), int(m), int(d)) )
+    
+    ranges = get_date_ranges(datelist)
+    data_object = Data.objects.get(pk=int(id))
+    for dmin, dmax in ranges:
+        DataBooking.objects.create(data=data_object,
+                                   user=get_datauser(request.user),
+                                   start=dmin, end=dmax)
+    return HttpResponseRedirect('../../../../')
+    #return HttpResponse(str(ranges))
 
-def prepare_families(session, update_checkboxes=True):
+def prepare_families(session, user=None, update_checkboxes=True, edit=False):
     if not session.has_key('filter'):
         session['filter'] = {}
     flist = []
@@ -60,6 +73,9 @@ def prepare_families(session, update_checkboxes=True):
     for f in ParamFamily.objects.all().order_by('sort_order'):
         oblist = list(f.data_set.all())
         flist.append({'name':f.name, 'items':oblist})
+        if edit and user:
+            for ob in oblist:
+                ob.editable = ob.is_editable_by(user)
         if update_checkboxes:
             for ob in oblist:
                 if filter.has_key(u'%d' % ob.pk):
@@ -67,3 +83,17 @@ def prepare_families(session, update_checkboxes=True):
                 else:
                     ob.checked = "checked"
     return flist
+
+def get_date_ranges(datelist):
+    dmin = datelist[0]
+    dmax = dmin
+    ranges = []
+    j1 = timedelta(days=1)
+    for day in datelist[1:]:
+        if day == dmax + j1:
+            dmax = day
+        else:
+            ranges.append((dmin, dmax))
+            dmin, dmax = day, day
+    ranges.append((dmin, dmax))
+    return ranges

@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
-from datetime import date
+from datetime import date, datetime
 
 
 class ParamProfile(models.Model):
@@ -33,6 +33,16 @@ class DataUser(models.Model):
     class Meta:
         db_table = u'rs_data_users'
         verbose_name = 'openbookings user'
+
+def get_datauser(user):
+    defprofile = ParamProfile.objects.get(name='User')
+    datauser, created = DataUser.objects.get_or_create(
+                            login=user.username,defaults={
+                                'password':user.password[:20],
+                                'profile':defprofile,
+                                'remarks':'django auth auto created'
+                            })
+    return datauser
 
 def create_datauser(sender, instance=None, **kwargs):
     if instance is None:
@@ -73,7 +83,13 @@ class Data(models.Model):
     manager = models.ForeignKey(DataUser)
     misc_info = models.CharField(max_length=765, blank=True)
     
+    editable = True
     checked = ""
+    
+    def is_editable_by(self, user):
+        if self.manager.admin:
+            if not user.is_superuser: return False
+        return True
     
     def color(self):
         try:
@@ -106,12 +122,12 @@ class Data(models.Model):
 class DataBooking(models.Model):
     book_id = models.AutoField(primary_key=True)
     rand_code = models.IntegerField(null=True, blank=True)
-    date = models.DateTimeField(db_column='book_date')
+    date = models.DateTimeField(db_column='book_date', auto_now_add=True)
     data = models.ForeignKey(Data, db_column='object_id', verbose_name='object')
     user = models.ForeignKey(DataUser)
     start = models.DateTimeField(db_column='book_start')
     end = models.DateTimeField(db_column='book_end')
-    validated = models.BooleanField()
+    validated = models.BooleanField(default=False)
     misc_info = models.CharField(max_length=765)
     
     def day_available2(self, year, month, day):
