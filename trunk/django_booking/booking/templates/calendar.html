@@ -21,6 +21,7 @@
 	ul.disp li { background: #FFFFFF; margin: 1px; padding: 2px 0 1px 0; }
 	ul.calendar li.dw-6, ul.calendar li.dw-5 { background: #BFBFBF; }
     li.edition, span.edition { display:none; }
+    li.confirm, span.confirm { display:none; }
 </style>
 {% endblock %}
 
@@ -32,6 +33,7 @@
               return e.id;
               });
             days_selected = days.join(',');
+            $(".selection").slideUp("slow");
             $(".edition").slideDown("slow");
         }
     });
@@ -44,10 +46,19 @@
 <script type="text/javascript">
 {% block on_check %}
 var days_selected = "";
+var item_id;
 
 function filter(item) {
-	document.location.href = 'set/'+item.id+'/'+days_selected;
+    $(".edition").slideUp("slow");
+    $(".confirm").slideDown("slow");
+    item_id = item.id;
 }
+
+function confirm() {
+    $(".confirm").slideUp("slow");
+	document.location.href = 'set/'+item_id+'/'+days_selected;
+}
+
 {% endblock %}
 </script>
 
@@ -108,7 +119,9 @@ function filter(item) {
 		{% for ob in f.items %}
 			<li>
 				<span style="background:{{ ob.color }}">&nbsp;</span>
-				<input id={{ ob.pk }} type=checkbox {{ ob.checked }} onchange='filter(this)'>
+				{% if ob.editable %}
+				  <input id={{ ob.pk }} type=checkbox {{ ob.checked }} onchange='filter(this)'>
+				{% endif %}
 				{{ ob.name }}
 			</li>
 		{% endfor %}
@@ -117,12 +130,26 @@ function filter(item) {
 	{% endfor %}
 
 	{% block edition %}
+	<li class="selection">
+		<h2>Sélection</h2>
+		<ul><li>
+		Vous pouvez maintenant sélectionner une période par un
+		glisser/déplacer de la souris. Il est également possible de sélectionner
+		plusieurs périodes sur des mois différents.
+		</li></ul>
+	</li>
 	<li class="edition">
 		<h2>Edition</h2>
 		<ul><li>
 		Vous venez de sélectionner une période. Vous pouvez maintenant
 		affecter cette période à un item dans une des boites ci-dessus.
 		</li></ul>
+	</li>
+	<li class="confirm">
+		<h2>Confirmer</h2>
+		<ul><li><a href=# onclick='confirm()'>Confirmer l'affectation</a></li>
+		<li><a href=.>Annuler</a></li>
+		</ul>
 	</li>
 	{% endblock %}
 	
