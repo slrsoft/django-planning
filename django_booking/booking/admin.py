@@ -1,32 +1,27 @@
 from django.contrib import admin
 from models import *
 
-class ParamProfileAdmin(admin.ModelAdmin):
-    list_display = ('name', 'display_order')
-admin.site.register(ParamProfile, ParamProfileAdmin)
-
-
-class DataUserAdmin(admin.ModelAdmin):
-    list_display = ('login', 'last_name', 'first_name', 'profile', 'locked', 'admin', 'email')
-admin.site.register(DataUser, DataUserAdmin)
-
-class ParamFamilyAdmin(admin.ModelAdmin):
+class GroupItemAdmin(admin.ModelAdmin):
     list_display = ('name', 'sort_order')
     ordering = ('sort_order',)
-admin.site.register(ParamFamily, ParamFamilyAdmin)
+admin.site.register(GroupItem, GroupItemAdmin)
 
-class DataAdmin(admin.ModelAdmin):
-    list_display = ('name', 'family', 'manager')
-admin.site.register(Data, DataAdmin)
+class ItemAdmin(admin.ModelAdmin):
+    list_display = ('name', 'group', 'manager', 'info')
+admin.site.register(Item, ItemAdmin)
 
-class DataBookingAdmin(admin.ModelAdmin):
-    list_display = ('data', 'start', 'end', 'user', 'validated')
-admin.site.register(DataBooking, DataBookingAdmin)
+class BookingAdmin(admin.ModelAdmin):
+    list_display = ('date', 'item', 'group', 'start', 'end', 'user', 'validated')
+admin.site.register(Booking, BookingAdmin)
 
 class ParamAdmin(admin.ModelAdmin):
     list_display = ('name', 'value_or_color')
 admin.site.register(Param, ParamAdmin)
 
-class ParamLangAdmin(admin.ModelAdmin):
-    list_display = ('english', 'french', 'german', 'norwegian')
-admin.site.register(ParamLang, ParamLangAdmin)
+class PermissionAdmin(admin.ModelAdmin):
+    list_display = ('item', 'group', 'action')
+admin.site.register(Permission, PermissionAdmin)
+
+class PolicyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'group', 'info')
+admin.site.register(Policy, PolicyAdmin)

@@ -11,7 +11,7 @@ from datetime import date, timedelta
 def display(request, year, template='calendar.html', extra_context={}):
     yeartable = calendars.Year(int(year))
     
-    yeartable.fill_bookings((Data.objects.get(name='Zone A'),))
+    yeartable.fill_bookings((Item.objects.get(name='Zone A'),))
     
     context = {'yeartable':yeartable,
                'bookables_by_family':prepare_families(request.session),
@@ -24,7 +24,7 @@ def display(request, year, template='calendar.html', extra_context={}):
 def edit(request, year, template='calendar.html', extra_context={}):
     yeartable = calendars.Year(int(year))
     
-    yeartable.fill_bookings((Data.objects.get(name='Zone A'),))
+    yeartable.fill_bookings((Item.objects.get(name='Zone A'),))
     
     context = {'yeartable':yeartable,
                'bookables_by_family':prepare_families(request.session, user=request.user, update_checkboxes=False, edit=True),
@@ -56,10 +56,10 @@ def edit_set(request, year, id, days):
         datelist.append( date(int(y), int(m), int(d)) )
     
     ranges = get_date_ranges(datelist)
-    data_object = Data.objects.get(pk=int(id))
+    data_object = Item.objects.get(pk=int(id))
     for dmin, dmax in ranges:
-        DataBooking.objects.create(data=data_object,
-                                   user=get_datauser(request.user),
+        Booking.objects.create(item=data_object,
+                                   user=request.user,
                                    start=dmin, end=dmax)
     return HttpResponseRedirect('../../../../')
     #return HttpResponse(str(ranges))
@@ -70,8 +70,8 @@ def prepare_families(session, user=None, update_checkboxes=True, edit=False):
     flist = []
     filter = session['filter']
     
-    for f in ParamFamily.objects.all().order_by('sort_order'):
-        oblist = list(f.data_set.all())
+    for f in GroupItem.objects.all().order_by('sort_order'):
+        oblist = list(f.item_set.all())
         flist.append({'name':f.name, 'items':oblist})
         if edit and user:
             for ob in oblist:
