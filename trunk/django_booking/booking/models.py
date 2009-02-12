@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 
 from datetime import date, datetime
 
-
+from django.db.models import Q
 
 class GroupItem(models.Model):
     name = models.CharField(max_length=150)
@@ -18,7 +18,13 @@ class GroupItem(models.Model):
 class ItemManager(models.Manager):
     def filter_authorized(self, user, permission_name='read'):
         query_set = super(ItemManager, self).get_query_set()
-        return query_set.all()
+        if user.is_superuser:
+            return query_set.all()
+        
+        Qpublic = Q(permission__group__name='public', permission__action=permission_name)
+        Qgroup = Q(permission__group__in=user.groups.all(), permission__action=permission_name)
+        result = query_set.filter(Qpublic | Qgroup)
+        return result
     
 class Item(models.Model):
     name = models.CharField(max_length=150)

@@ -69,7 +69,7 @@ function confirm() {
 <div class="news" id="post-19">
 	<div class="top"><h2>
 		{{ yeartable.year }}
-		<span>&nbsp;dernière mise à jour: jj/mm/yyyy</span>
+		<span>&nbsp;dernière mise à jour: {{ date_update|date:"d M Y , G:i" }}</span>
 	</h2></div>
 	<div class="midTop"></div>
 	<div class="mid">
@@ -114,19 +114,21 @@ function confirm() {
 {% block sidebar %}
 <ul>
 	{% for f in bookables_by_family %}
-		<li><h2>{{ f.name }}</h2>
-		<ul>
-		{% for ob in f.items %}
-			<li>
-				<span style="background:{{ ob.color }}">&nbsp;</span>
-				{% if ob.editable %}
-				  <input id={{ ob.pk }} type=checkbox {{ ob.checked }} onchange='filter(this)'>
-				{% endif %}
-				{{ ob.name }}
+		{% if f.items %}
+			<li><h2>{{ f.name }}</h2>
+			<ul>
+			{% for ob in f.items %}
+				<li>
+					<span style="background:{{ ob.color }}">&nbsp;</span>
+					{% if ob.editable %}
+					  <input id={{ ob.pk }} type=checkbox {{ ob.checked }} onchange='filter(this)'>
+					{% endif %}
+					{{ ob.name }}
+				</li>
+			{% endfor %}
+			</ul>
 			</li>
-		{% endfor %}
-		</ul>
-		</li>
+		{% endif %}
 	{% endfor %}
 
 	{% block edition %}
@@ -152,6 +154,7 @@ function confirm() {
 		</ul>
 	</li>
 	{% endblock %}
+
 	
 </ul>
 {% endblock %}
