@@ -11,7 +11,7 @@ from datetime import date, timedelta
 def display(request, year, template='calendar.html', extra_context={}):
     yeartable = calendars.Year(int(year))
     
-    yeartable.fill_bookings((Item.objects.get(name='Zone A'),))
+    yeartable.fill_bookings(Item.objects.filter_authorized(request.user))
     
     context = {'yeartable':yeartable,
                'bookables_by_family':prepare_families(request.session),

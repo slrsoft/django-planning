@@ -15,6 +15,11 @@ class GroupItem(models.Model):
     class Meta:
         verbose_name = 'Group'
 
+class ItemManager(models.Manager):
+    def filter_authorized(self, user, permission_name='read'):
+        query_set = super(ItemManager, self).get_query_set()
+        return query_set.all()
+    
 class Item(models.Model):
     name = models.CharField(max_length=150)
     group = models.ForeignKey(GroupItem)
@@ -23,6 +28,8 @@ class Item(models.Model):
     
     editable = True
     checked = ""
+    
+    objects = ItemManager()
     
     def is_editable_by(self, user):
         #TODO
@@ -72,7 +79,7 @@ class Booking(models.Model):
         return False
 
     def __unicode__(self):
-        return self.data.name
+        return self.item.name
 
 PERMISSION_CHOICES = (('read','can read'),
                       ('add','can add'),
@@ -85,7 +92,7 @@ class Permission(models.Model):
     action = models.CharField(max_length=10, choices=PERMISSION_CHOICES)
     
     def __unicode__(self):
-        return '%s %s %s', (group.name, self.action_display(), item.name)
+        return '%s %s %s' % (self.group.name, self.get_action_display(), self.item.name)
 
 class Policy(Permission):
     name = models.CharField(max_length=75, primary_key=True)

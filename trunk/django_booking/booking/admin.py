@@ -20,6 +20,8 @@ admin.site.register(Param, ParamAdmin)
 
 class PermissionAdmin(admin.ModelAdmin):
     list_display = ('item', 'group', 'action')
+    save_as = True
+    list_filter = ('item', 'group')
 admin.site.register(Permission, PermissionAdmin)
 
 class PolicyAdmin(admin.ModelAdmin):
