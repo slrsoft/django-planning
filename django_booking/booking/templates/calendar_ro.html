@@ -16,9 +16,16 @@ function filter(item) {
 	<li>
 		<h2>Actions</h2>
 		<ul>
-			<li><a href=".">Mettre à jour</a></li>
-			<li><a href=edit/>Editer</a></li>
+			<li><a href=edit/>Réserver</a></li>
+			
+			{% if not user.is_authenticated %}
+			<li class="authentication">
+				<li><a href=login/?next=..>se connecter</a></li>
+			</li>
+			{% endif %}
+			
 		</ul>
+	
 	</li>
 	{% endif %}
 {% endblock %}

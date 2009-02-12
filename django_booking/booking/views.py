@@ -6,15 +6,21 @@ from django.template import RequestContext
 from models import *
 
 import calendars
-from datetime import date, timedelta
+from datetime import datetime, date, timedelta
 
 def display(request, year, template='calendar.html', extra_context={}):
-    yeartable = calendars.Year(int(year))
+    if not year:
+        year = datetime.now().year
+    else:
+        year = int(year)
+    
+    yeartable = calendars.Year(year)
     
     yeartable.fill_bookings(Item.objects.filter_authorized(request.user))
     
     context = {'yeartable':yeartable,
-               'bookables_by_family':prepare_families(request.session),
+               'date_update':date_update(),
+               'bookables_by_family':prepare_families(request.session, user=request.user),
                'can_edit':True, 'filter':request.session['filter']}
     context.update(extra_context)
     response = render_to_response(template, context,
@@ -27,6 +33,7 @@ def edit(request, year, template='calendar.html', extra_context={}):
     yeartable.fill_bookings((Item.objects.get(name='Zone A'),))
     
     context = {'yeartable':yeartable,
+               'date_update':date_update(),
                'bookables_by_family':prepare_families(request.session, user=request.user, update_checkboxes=False, edit=True),
                'can_edit':True, 'filter':request.session['filter']}
     context.update(extra_context)
@@ -71,7 +78,13 @@ def prepare_families(session, user=None, update_checkboxes=True, edit=False):
     filter = session['filter']
     
     for f in GroupItem.objects.all().order_by('sort_order'):
-        oblist = list(f.item_set.all())
+        if user:
+            if edit: permission_name='add'
+            else: permission_name='read'
+            oblist = list(Item.objects.filter_authorized(user, permission_name=permission_name).filter(group=f))
+        else:
+            oblist = list(f.item_set.all())
+            
         flist.append({'name':f.name, 'items':oblist})
         if edit and user:
             for ob in oblist:
@@ -97,3 +110,6 @@ def get_date_ranges(datelist):
             dmin, dmax = day, day
     ranges.append((dmin, dmax))
     return ranges
+
+def date_update():
+    return Booking.objects.all().order_by('-date')[0].date
