@@ -91,7 +91,7 @@ function confirm() {
 		<ul class="calendar disp">
 	   &nbsp;
 		{% for d in m.days %}
-		    <li><span class="daytag">&nbsp;</span> {{ d.span_color_list|safe }}</li>
+		    <li> {{ d.span_color_list|safe }}</li>
 		{% endfor %}
 		</ul>
 	</td>

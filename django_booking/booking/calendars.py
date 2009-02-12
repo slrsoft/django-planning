@@ -24,7 +24,7 @@ class Day:
         return (self.dayweek > 4)
     def span_color_list(self):
         if not _hash_booking_set.has_key(self.key):
-            return ""
+            return '<span>&nbsp;</span>'
         return _hash_booking_set[self.key]
     def __str__(self):
         return '%d %s' % (self.daymonth, days_ab[self.dayweek])
@@ -56,7 +56,7 @@ class Year:
             d, n = monthrange(self.year, m)
             for dm in range(1, n+1):
                 key = '%d-%d-%d' % (self.year, m, dm)
-                _hash_booking_set[key] = ""
+                _hash_booking_set[key] = "<span>&nbsp;</span>"
                 for data in data_list:
                     _hash_booking_set[key] += data.span_color(day=date(year, m, dm))
         
